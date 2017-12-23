@@ -48,6 +48,7 @@ install:
 
     # Configure the VM.
     - cmd: conda install -n root --quiet --yes conda-forge-build-setup
+    - cmd: call %CONDA_INSTALL_LOCN%\Scripts\activate.bat
     - cmd: run_conda_forge_build_setup
 
 # Skip .NET project specific build phase.

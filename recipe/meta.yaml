@@ -53,6 +53,7 @@ requirements:
     - xz 5.2.*                 # [not win]
     - libpng >=1.6.32,<1.6.35     # [not win]
     - texlive-core             # [osx]
+    - miktex                   # [win[
     - {{posix}}pkg-config
     - {{posix}}autoconf
     - {{posix}}automake-wrapper  # [win]
@@ -128,7 +129,8 @@ test:
     - Rterm --help  # [win]
     - Rterm --version  # [win]
     - conda inspect linkages -p $PREFIX $PKG_NAME  # [not win]
-    - conda inspect objects -p $PREFIX $PKG_NAME  # [osx]
+    - conda inspect objects -p $PREFIX $PKG_NAME   # [osx]
+    - if not exist %PREFIX%\\R\\include exit 1     # [win]
 
 about:
   home: http://www.r-project.org/

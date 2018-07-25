@@ -21,6 +21,11 @@ export TK_CONFIG=$PREFIX/lib/tkConfig.sh
 export TCL_LIBRARY=$PREFIX/lib/tcl8.5
 export TK_LIBRARY=$PREFIX/lib/tk8.5
 
+# Cf. https://github.com/conda-forge/staged-recipes/issues/673, we're in the
+# process of excising Libtool files from our packages. Existing ones can break
+# the build while this happens.
+find $PREFIX -name '*.la' -delete
+
 Linux() {
     # If lib/R/etc/javaconf ends up with anything other than ~autodetect~
     # for any value (except JAVA_HOME) then 'R CMD javareconf' will never
@@ -241,7 +246,7 @@ Mingw_w64_makefiles() {
       # http://ctan.mines-albi.fr/systems/win32/miktex/tm/packages/url.tar.lzma
       # http://ctan.mines-albi.fr/systems/win32/miktex/tm/packages/mptopdf.tar.lzma
       # http://ctan.mines-albi.fr/systems/win32/miktex/tm/packages/inconsolata.tar.lzma
-        curl -C - -o ${DLCACHE}/miktex-portable.exe -SLO https://ctan.org/tex-archive/systems/win32/miktex/setup/windows-x86/miktex-portable.exe || true
+        curl -C - -o ${DLCACHE}/miktex-portable.exe -SLO https://ctan.org/tex-archive/systems/win32/miktex/setup/windows-x86/miktex-portable.exe
         echo "Extracting miktex-portable.exe, this will take some time ..."
         7za x -y ${DLCACHE}/miktex-portable.exe > /dev/null
         # We also need the url, incolsolata and mptopdf packages and
